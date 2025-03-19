@@ -4,6 +4,7 @@ let voiceSelect = document.querySelector("select");
 let rateSlider = document.querySelector("#rate");
 let rateDisplay = document.querySelector("#rateValue");
 let textArea = document.querySelector("textarea");
+let isPaused = true;
 
 function loadVoices() {
     voices = window.speechSynthesis.getVoices();
@@ -41,6 +42,18 @@ document.querySelector("button").addEventListener("click", () => {
     speech.text = document.querySelector("textarea").value;
     window.speechSynthesis.speak(speech);
 });
+
+document.querySelector("#pause").addEventListener("click", () => {
+   window.speechSynthesis.pause();
+   isPaused = true;
+});
+
+document.querySelector("#resume").addEventListener("click", () => {
+    if(isPaused){
+    window.speechSynthesis.resume();
+    isPaused = false;
+    }
+ });
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     chrome.scripting.executeScript(

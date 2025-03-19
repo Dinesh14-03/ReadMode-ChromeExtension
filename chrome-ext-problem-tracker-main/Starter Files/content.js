@@ -1,11 +1,13 @@
-function extractText() {
-  let text = document.body.innerText.trim();
-  return text.length > 5000 ? text.slice(0, 5000) + "..." : text; // Limit length
+function extractMainContent() {
+  let mainContent = document.querySelector("article, #mw-content-text"); 
+  if (mainContent) {
+      return mainContent.innerText;
+  }
+  return "No main content found.";
 }
 
-// Send extracted text to the popup
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "extractText") {
-      sendResponse({ text: extractText() });
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "extractText") {
+      sendResponse({ text: extractMainContent() });
   }
 });
