@@ -107,7 +107,7 @@ async function summarizeTextWithGeminiAPI(text) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            contents: [{ parts: [{ text }] }]
+            contents: [{ parts: [{ text :`Summarize the following content by highlighting only the important events and removing any headings or section titles:\n\n${text}`}] }]
         })
     });
 

@@ -1,8 +1,12 @@
 function extractMainContent() {
-  let mainContent = document.querySelector("article, #mw-content-text"); 
+  let mainContent = document.querySelector("#mw-content-text");
+
   if (mainContent) {
-      return mainContent.innerText;
+      mainContent.querySelectorAll("nav, .sidebar, .header, .footer, .mw-editsection, .reference, .toc").forEach(el => el.remove());
+
+      return mainContent.innerText.trim();
   }
+
   return "No main content found.";
 }
 
